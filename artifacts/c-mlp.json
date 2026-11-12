@@ -1,0 +1,43 @@
+{
+ "model": "/home/somewheresystems/qwenputer/out/Qwen-Concept-27B-Qwenputer",
+ "program": "c-mlp",
+ "tokens": 2724189,
+ "reference_tokens": 2723867,
+ "context": {
+  "got": [
+   "J(150)",
+   "F0(105)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(105)",
+   "('text', 72)",
+   "F0(105)",
+   "J(460)",
+   "NT"
+  ],
+  "want": [
+   "J(150)",
+   "F0(105)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(105)",
+   "F0(105)",
+   "J(460)",
+   "NT",
+   "F0(109)"
+  ]
+ },
+ "instructions": 2059619,
+ "exact": false,
+ "exact_chip_stream": true,
+ "echoes": 322,
+ "echoes_equal_printed_bytes": true,
+ "halted": true,
+ "first_mismatch": 270972,
+ "output": "img0 want=0 pred=0 logit=14355\nimg1 want=1 pred=1 logit=11573\nimg2 want=2 pred=2 logit=14612\nimg3 want=3 pred=3 logit=5682\nimg4 want=4 pred=4 logit=10911\nimg5 want=5 pred=5 logit=7459\nimg6 want=6 pred=6 logit=11065\nimg7 want=7 pred=7 logit=15007\nimg8 want=8 pred=8 logit=11510\nimg9 want=9 pred=9 logit=10046\ncorrect=10/10\n",
+ "seconds": 10514.101422309875,
+ "tok_per_s": 259.09860392059204,
+ "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
+}

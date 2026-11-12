@@ -1,0 +1,43 @@
+{
+ "model": "out/Concept-RV32IM-27B-exact",
+ "program": "c-crc32p",
+ "tokens": 6297,
+ "reference_tokens": 6282,
+ "context": {
+  "got": [
+   "J(32)",
+   "F0(99)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(99)",
+   "('text', 66)",
+   "F0(99)",
+   "J(342)",
+   "NT"
+  ],
+  "want": [
+   "J(32)",
+   "F0(99)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(99)",
+   "F0(99)",
+   "J(342)",
+   "NT",
+   "F0(114)"
+  ]
+ },
+ "instructions": 4109,
+ "exact": false,
+ "exact_chip_stream": true,
+ "echoes": 15,
+ "echoes_equal_printed_bytes": true,
+ "halted": true,
+ "first_mismatch": 4188,
+ "output": "crc32=414fa339\n",
+ "seconds": 28.59455370903015,
+ "tok_per_s": 220.21676099849074,
+ "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
+}

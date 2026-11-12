@@ -1,0 +1,50 @@
+Concept RV32IM 27B
+Copyright 2026 Concept Country
+
+This product includes software developed as part of Qwenputer
+(https://github.com/divagr18/qwenputer), Copyright Divyansh Agrawal,
+licensed under the Apache License, Version 2.0.
+
+The chipformer architecture, the RV32IM instruction encoding into token
+space, and the merge procedure in merge27.py originate in that project.
+This repository redistributes modified forms of that work and is therefore
+licensed under the Apache License, Version 2.0, as required.
+
+MODIFICATIONS
+
+The merge script was changed in three ways. Each is documented, with the
+measurement that motivated it, in merge/patch_merge27.py:
+
+  1. Rescaled RMSNorm gains are stored in float32 rather than bfloat16.
+
+     Widening the hidden state from 5120 to 6656 with zeros shrinks the RMS
+     by sqrt(5120/6656), so every norm gain is rescaled by that factor to
+     compensate. The factor is irrational, and casting the result back to
+     bfloat16 rounds it: 660,479 of 660,480 gains across 129 tensors landed
+     off the bfloat16 grid.
+
+     Stock Qwen3.5 RMSNorm.forward calls self.weight.float(), upcasting the
+     gain to float32 on every forward pass regardless of stored dtype, so
+     float32 is the dtype the module consumes. Cost: 1.32 MB on an 87 GB
+     checkpoint.
+
+  2. The vision tower (333 tensors) is carried through rather than dropped.
+
+     The tower operates in its own 1152-dimensional space and meets the text
+     hidden state only at merger.linear_fc2, whose output is 5120 and which
+     the upstream OUT_ROWS pattern already matched.
+
+  3. Multi-token prediction (15 tensors) is carried through, and
+     mtp_num_hidden_layers is taken from the source config rather than
+     pinned to zero.
+
+     MTP runs at 5120 throughout and takes the same widening as the text
+     path. mtp.fc reads a concatenation of embedding and hidden state, so
+     both halves of its input are padded rather than only the tail.
+
+The base weights are Qwen3.8-27B, Copyright Alibaba Cloud, licensed under
+the Apache License, Version 2.0.
+
+The host model is Concept 27B, produced by the gradient-free weight editing
+procedure described in the companion paper and published at
+https://github.com/conceptcountry/weight-space-programming.

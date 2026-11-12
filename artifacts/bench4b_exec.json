@@ -1,0 +1,36 @@
+[
+ {
+  "ask": "Use calc: what is 123456789 * 987654321?",
+  "text": "<tool_call>\n<function=calc>\n<parameter=expression>\n123456789 * 987654321\n</parameter>\n</function>\n</tool_call>\n<tool_response>\n121932631112635269\n</tool_response>\n<think>\n\n</think>\n\n123456789 * 987654321 = 121932631112635269<|im_end|>",
+  "text_tokens": 114,
+  "chip_tokens": 2430,
+  "seconds": 24.95486879348755,
+  "chip_tok_per_s": 97.37578747094655,
+  "lock_error": null,
+  "replay": {
+   "ok": true,
+   "positions": 2950,
+   "owned": 2460,
+   "wrong_predictions": 0,
+   "owner_mismatch": 0,
+   "runs": 1
+  }
+ },
+ {
+  "ask": "Use calc: what is 123456789 * 987654321?",
+  "text": "<tool_call>\n<function=calc>\n<parameter=expression>\n123456789 * 987654321\n</parameter>\n</function>\n</tool_call>\n<tool_response>\n121932631112635269\n</tool_response>\n<think>\n\n</think>\n\n123456789 * 987654321 = 121932631112635269<|im_end|>",
+  "text_tokens": 114,
+  "chip_tokens": 2430,
+  "seconds": 10.242529153823853,
+  "chip_tok_per_s": 237.2460906389323,
+  "lock_error": null,
+  "replay": {
+   "ok": true,
+   "positions": 2950,
+   "owned": 2460,
+   "wrong_predictions": 0,
+   "owner_mismatch": 0,
+   "runs": 1
+  }
+ }
+]

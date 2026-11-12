@@ -1,0 +1,43 @@
+{
+ "model": "out/Concept-RV32IM-27B-exact",
+ "program": "c-sudoku",
+ "tokens": 3064539,
+ "reference_tokens": 3064503,
+ "context": {
+  "got": [
+   "J(169)",
+   "F0(115)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(115)",
+   "('text', 82)",
+   "F0(115)",
+   "J(505)",
+   "NT"
+  ],
+  "want": [
+   "J(169)",
+   "F0(115)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(115)",
+   "F0(115)",
+   "J(505)",
+   "NT",
+   "F0(111)"
+  ]
+ },
+ "instructions": 2580085,
+ "exact": false,
+ "exact_chip_stream": true,
+ "echoes": 36,
+ "echoes_equal_printed_bytes": true,
+ "halted": true,
+ "first_mismatch": 3062148,
+ "output": "solved=1 steps=37652 row0=534678912\n",
+ "seconds": 13911.838136196136,
+ "tok_per_s": 220.28282459861381,
+ "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
+}

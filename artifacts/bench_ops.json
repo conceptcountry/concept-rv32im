@@ -1,0 +1,32 @@
+{
+ "note": "instruction cost per operation on the in-weights RV32IM machine, measured on the reference emulator",
+ "iterations": 10000,
+ "baseline_instructions": 61326,
+ "ops": {
+  "int8_mac": {
+   "total_instructions": 103501,
+   "instructions_per_op": 4.22,
+   "relative_to_int8_mac": 1.0
+  },
+  "float_mac": {
+   "total_instructions": 1955142,
+   "instructions_per_op": 189.38,
+   "relative_to_int8_mac": 44.9
+  },
+  "expf": {
+   "total_instructions": 21910709,
+   "instructions_per_op": 2184.94,
+   "relative_to_int8_mac": 517.8
+  },
+  "float_div": {
+   "total_instructions": 1897242,
+   "instructions_per_op": 183.59,
+   "relative_to_int8_mac": 43.5
+  },
+  "sqrtf": {
+   "total_instructions": 3438141,
+   "instructions_per_op": 337.68,
+   "relative_to_int8_mac": 80.0
+  }
+ }
+}

@@ -1,0 +1,177 @@
+{
+  "generated_utc": "2026-11-12T02:43:43Z",
+  "mlp_run": {
+    "program": "c-mlp",
+    "exact_chip_stream": true,
+    "exact_raw_including_echoes": false,
+    "instructions": 2059619,
+    "tokens": 2724189,
+    "reference_tokens": 2723867,
+    "echoes": 322,
+    "echoes_equal_printed_bytes": true,
+    "halted": true,
+    "first_mismatch": 270972,
+    "seconds": 10514.101422309875,
+    "tok_per_s": 259.09860392059204,
+    "output": "img0 want=0 pred=0 logit=14355\nimg1 want=1 pred=1 logit=11573\nimg2 want=2 pred=2 logit=14612\nimg3 want=3 pred=3 logit=5682\nimg4 want=4 pred=4 logit=10911\nimg5 want=5 pred=5 logit=7459\nimg6 want=6 pred=6 logit=11065\nimg7 want=7 pred=7 logit=15007\nimg8 want=8 pred=8 logit=11510\nimg9 want=9 pred=9 logit=10046\ncorrect=10/10\n",
+    "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
+  },
+  "mlp_run_executor": null,
+  "gpt4_run": null,
+  "gpt8_run": null,
+  "mlp_paths_agree": null,
+  "executor_speedup_over_hf": null,
+  "mlp_model": {
+    "arch": "784-32-10 MLP, ReLU",
+    "params_int8": 25408,
+    "rodata_bytes": 33426,
+    "float_accuracy": 0.9529,
+    "int_accuracy": 0.9526,
+    "accuracy_delta": 0.0003,
+    "requant_shift": 11,
+    "batch_images": 10,
+    "expected_predictions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "expected_labels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "batch_correct": 10
+  },
+  "gpt_model": {
+    "arch": "char GPT V=65 d=64 L=2 H=2 ff=256 ctx=64",
+    "params_int8": 110976,
+    "rodata_bytes": 112160,
+    "float_val_loss": 1.877,
+    "int_val_loss": 1.6634,
+    "prompt": "ROMEO:",
+    "float_generation": "ROMEO:\nWhat the see the see th",
+    "spec_generation": "ROMEO:\nWhat the see the seasur",
+    "vocab": 65,
+    "layers": 2,
+    "d_model": 64,
+    "heads": 2,
+    "d_ff": 256,
+    "ctx": 64,
+    "n_calibrated_tensors": 18,
+    "n_multipliers": 20,
+    "score_scale_nats": 0.191527,
+    "corpus": "tiny Shakespeare",
+    "float_int_shared_prefix_chars": 26,
+    "int_beats_float": true
+  },
+  "op_costs": {
+    "baseline_instructions": 61326,
+    "iterations": 10000,
+    "per_op": {
+      "int8_mac": {
+        "instructions": 4.22,
+        "relative_to_int8_mac": 1.0
+      },
+      "float_mac": {
+        "instructions": 189.38,
+        "relative_to_int8_mac": 44.9
+      },
+      "expf": {
+        "instructions": 2184.94,
+        "relative_to_int8_mac": 517.8
+      },
+      "float_div": {
+        "instructions": 183.59,
+        "relative_to_int8_mac": 43.5
+      },
+      "sqrtf": {
+        "instructions": 337.68,
+        "relative_to_int8_mac": 80.0
+      }
+    }
+  },
+  "float_softmax_cost": {
+    "exps_per_token": 256,
+    "instructions_per_token": 559345,
+    "note": "expf calls for one token at full context, at the measured soft-float cost",
+    "matmul_instructions_per_token": 501539,
+    "ratio_to_matmuls": 1.12
+  },
+  "quant_probe_chip": {
+    "n_quantized_tensors": 50,
+    "n_excluded_tensors": 104,
+    "n_programs": 4,
+    "formats": {
+      "bf16": {
+        "n_exact": 4,
+        "n_programs": 4,
+        "max_relative_weight_error": 0.0
+      },
+      "fp8": {
+        "n_exact": 0,
+        "n_programs": 4,
+        "max_relative_weight_error": 0.028571446736653645
+      },
+      "q8_0": {
+        "n_exact": 0,
+        "n_programs": 4,
+        "max_relative_weight_error": 0.00390625
+      },
+      "q4_k_m": {
+        "n_exact": 0,
+        "n_programs": 4,
+        "max_relative_weight_error": 0.0712890625
+      }
+    },
+    "control_exact": true,
+    "n_lossy_formats": 3,
+    "n_lossy_formats_exact": 0,
+    "lossy_programs_exact": 0,
+    "smallest_breaking_error": 0.00390625
+  },
+  "machine": {
+    "code_rom_kb": 256,
+    "rodata_kb": 128,
+    "ram_kb": 32,
+    "isa": "RV32IM + Zba"
+  },
+  "artifact_digests": {
+    "bench4b_exec.json": "9a28546d484d2c19cdfc1381b0c7ed1b29429e8ca78d8c751ded5d9e36ce2a54",
+    "bench_ops.json": "f0f3afb65b77e9198aa2bde51a6a3196e7ca1a86538815032adf4deb946f0be6",
+    "bex.log": "e82295927375b9576be0cbe9bfb1b7ac700e1be91929d2199320537b6506ad69",
+    "c-mlp.json": "0636f313074fbd69580304e8a90ad20444a611d379b094470ab98dfca4c5d823",
+    "c27_c-crc32.json": "9bee835513bde1775275cf3ff9aef1b84215d80b023a81f408ee1d6f91ee728d",
+    "c27_c-gmpmul.json": "e0bf6d5cc0d20e1432d42d4451a71acf9ea752f4f85a695d2dbf51713bf87d89",
+    "c27_c-strops.json": "87c36cfb23a157288f087044cb552eae9f01858adb5fb275eeab6ea5f850474c",
+    "calc27.json": "b4f466a17d104573bf77caccc185ad7e721d047c5a1ecce054c334f3fdf0971c",
+    "calc4b.log": "0b38fe324ec6bd1e92076eee49b36f3077ac11bc0aa887fc00b8ddea2f218e58",
+    "chipformer.json": "3210ee94178ba819a8b600109ddc1271e0d101efe3cfb46e95f4828edeff3c88",
+    "gpt_meta.json": "63b4957e1b1166024937f241b52d17d6ad1b5b64fb4e55e76ff91bf4f359c5ae",
+    "merged_config.json": "e7abc6f5175806bc91c695fd6e522a34bd405d04400d4a7b48cea78f3755696a",
+    "mlp_meta.json": "87dce55964441dcc98aceff572ccd6ebe02234a9bd0829ed2ae4b78d14665066",
+    "p2_and_exec.log": "5653f027c5afa293354135a9c10293348fe97e16af656e5d1567d0abbbc40da1",
+    "prompts20.json": "4aba7a734b82a0e3c6384ef4026c84cf5de93d66156c6358f2ed0fe0bdb3ff9b",
+    "quant_probe_chip.json": "d4460087aab5053578ff6a1c7a83f62e386f8de8fe4a8e3408d8b5a81018e1e3",
+    "sha_report.json": "e9f0546b1b64b118f44f672285d7df0e5022061f7808929605ce7f3c85aef50a",
+    "t27b.log": "e32b87def6446eb6ba8920a2a088a85159ad187aad6a81f38e86bb388b648ee6",
+    "t4b.log": "ba0e5f1190668f8c2b9cf0b736b510347394ae9425e3d5a727c5bdaefc64c803",
+    "teacher20.json": "8b4483e771aa2c06134c2208eec22f1fb808758bdfa8b16d75d34b6ee36f696c",
+    "text_concept.json": "5fc56eabf660487bbf88451334e317b3a8f3118f36810216d908e02d6a76ea7a",
+    "text_merged.json": "01946908fd22d9bc732125c7eac558fdbc2d597f79fa2f7e2b2a5ccdc11bc1a8"
+  },
+  "n_artifacts": 22
+}

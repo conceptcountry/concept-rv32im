@@ -1,0 +1,26 @@
+Loading weights:   0%|          | 0/580 [00:00<?, ?it/s]Loading weights:  51%|█████     | 297/580 [00:00<00:00, 2941.48it/s]Loading weights: 100%|██████████| 580/580 [00:00<00:00, 3480.98it/s]
+[transformers] The tokenizer you are loading from '/home/somewheresystems/qwenputer/hf4b' with an incorrect regex pattern: https://huggingface.co/mistralai/Mistral-Small-3.1-24B-Instruct-2503/discussions/84#69121093e8b480e709447d5e. This will lead to incorrect tokenization. You should set the `fix_mistral_regex=True` flag when loading this tokenizer to fix this issue.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+  500 tokens (44 text, 455 chip) 5s: F0(1) J(1330) NT F0(101) V(181) F1(1) F0(101) J(1323)
+  1000 tokens (44 text, 955 chip) 7s: F1(1) F0(0) NT F0(29) V(480) F1(1) J(1319) F0(53)
+  1500 tokens (47 text, 1452 chip) 9s: BD(0) BD(0) BD(0) BD(0) BD(0) BD(0) BD(0) BD(0)
+  2000 tokens (47 text, 1952 chip) 11s: F0(536) ST1 ST1 ST1 ST1 ST1 ST1 ST1
+  2500 tokens (73 text, 2426 chip) 15s: BYTE(259) '</think>' F0(10) BYTE(10) '\n' J(1308) F0(0) F0(0)
+<tool_call>
+<function=calc>
+<parameter=expression>
+123456789 * 987654321
+</parameter>
+</function>
+</tool_call>
+<tool_response>
+121932631112635269
+</tool_response>
+<think>
+
+</think>
+
+123456789 * 987654321 = 121932631112635269<|im_end|>
+[114 text + 2430 chip tokens in 18.4s, head mismatches 0, lock error None]
+{'ok': True, 'positions': 2950, 'owned': 2460, 'wrong_predictions': 0, 'owner_mismatch': 0, 'runs': 1}

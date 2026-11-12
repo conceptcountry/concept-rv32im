@@ -1,0 +1,25 @@
+Started qwp-p2.service - /usr/bin/bash /home/somewheresystems/qwenputer/p2.sh.
++ export PATH=/home/somewheresystems/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin RV_TOKENIZER=/home/somewheresystems/wsp/models/e_Bcc_0.1/tokenizer.json
++ PATH=/home/somewheresystems/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
++ RV_TOKENIZER=/home/somewheresystems/wsp/models/e_Bcc_0.1/tokenizer.json
++ for t in 4b 27b
++ RV_TARGET=4b
++ uv run --no-sync pytest tests/test_rv_bridge.py -q -p no:cacheprovider -rs
+.........                                                                [100%]
+9 passed in 57.05s
++ for t in 4b 27b
++ RV_TARGET=27b
++ uv run --no-sync pytest tests/test_rv_bridge.py -q -p no:cacheprovider -rs
+.........                                                                [100%]
+9 passed in 56.30s
++ RV_TARGET=27b
++ uv run --no-sync python -m chipformer.rv.fuzz --programs 64 --batch 32 --v2 --elf c-fib c-qsort c-sieve4 c-crc32 c-sort c-strops c-sieve c-gmpmul
+  .. 32 / 64 rows, 75152 instructions, 8 s
+fuzz: {'programs': 64, 'instructions': 152848, 'tokens': 232978, 'seconds': 15.621729612350464}
+  .. 8 / 8 rows, 2495296 instructions, 1048 s
+elf ['c-fib', 'c-qsort', 'c-sieve4', 'c-crc32', 'c-sort', 'c-strops', 'c-sieve', 'c-gmpmul']: {'programs': 8, 'instructions': 2495296, 'tokens': 2673180, 'seconds': 1048.2884595394135}
+qwp-p2.service: Consumed 28min 50.325s CPU time, 437.2M memory peak, 0B memory swap peak.
+{"target": "Target(key_heads=16, value_heads=48, intermediate=17408)", "executor": "triton(v2)", "prog": "c-gmpmul", "batch": 1, "tokens_per_stream": 22670, "instructions": 14767, "seconds": 3.748810291290283, "tok_s_per_stream": 6047.251858188143, "tok_s_total": 6047.251858188143, "instr_s_total": 3939.116373615541, "exact": true}
+{"model": "/home/somewheresystems/qwenputer/hf4b", "program": "c-gmpmul", "tokens": 22674, "reference_tokens": 22670, "context": {"got": ["J(40)", "F0(109)", "F0(0)", "F0(0)", "F0(1)", "BYTE(109)", "('text', 76)", "F0(109)", "J(11594)", "NT"], "want": ["J(40)", "F0(109)", "F0(0)", "F0(0)", "F0(1)", "BYTE(109)", "F0(109)", "J(11594)", "NT", "F0(117)"]}, "instructions": 14767, "exact": false, "first_mismatch": 21725, "output": "mul=1219326311370217952249809480012498094790\n", "seconds": 83.34889960289001, "tok_per_s": 272.0371847502328, "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"}
+{"model": "/home/somewheresystems/qwenputer/out/Qwen-Concept-27B-Qwenputer", "program": "c-gmpmul", "tokens": 22674, "reference_tokens": 22670, "context": {"got": ["J(40)", "F0(109)", "F0(0)", "F0(0)", "F0(1)", "BYTE(109)", "('text', 76)", "F0(109)", "J(11594)", "NT"], "want": ["J(40)", "F0(109)", "F0(0)", "F0(0)", "F0(1)", "BYTE(109)", "F0(109)", "J(11594)", "NT", "F0(117)"]}, "instructions": 14767, "exact": false, "first_mismatch": 21725, "output": "mul=1219326311370217952249809480012498094790\n", "seconds": 86.68309116363525, "tok_per_s": 261.573505231803, "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"}
+{"positions": 960, "top1_agree_base_vs_merged": 955, "top1_agree_base_prefill_vs_base_decode": 954, "kl_mean": 0.0005459694657474756, "kl_max": 0.03085799515247345}

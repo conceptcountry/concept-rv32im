@@ -1,0 +1,18 @@
+{
+ "model": "out/Concept-RV32IM-27B-exact",
+ "program": "rv32um-remu",
+ "tokens": 125,
+ "reference_tokens": 125,
+ "context": null,
+ "instructions": 58,
+ "exact": true,
+ "exact_chip_stream": true,
+ "echoes": 0,
+ "echoes_equal_printed_bytes": true,
+ "halted": true,
+ "first_mismatch": null,
+ "output": "",
+ "seconds": 0.587909460067749,
+ "tok_per_s": 212.61777278697872,
+ "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
+}

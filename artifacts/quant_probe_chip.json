@@ -1,0 +1,185 @@
+{
+ "model": "/home/somewheresystems/qwenputer/out/Qwen-Concept-27B-Qwenputer",
+ "note": "chip-layer weight-grid simulation; activations are not quantized, so a pass here is necessary but not sufficient",
+ "excluded_from_quantization": [
+  "norm",
+  "conv1d",
+  "in_proj_a",
+  "in_proj_b",
+  ".gate",
+  "embed_tokens",
+  "lm_head",
+  "A_log",
+  "dt_bias"
+ ],
+ "n_quantized_tensors": 50,
+ "n_excluded_tensors": 104,
+ "programs": [
+  "rv32ui-add",
+  "rv32ui-sll",
+  "rv32um-mul",
+  "c-crc32"
+ ],
+ "formats": {
+  "bf16": {
+   "max_relative_weight_error": 0.0,
+   "programs": {
+    "rv32ui-add": {
+     "exact_chip_stream": true,
+     "instructions": 427,
+     "first_mismatch": null,
+     "halted": true
+    },
+    "rv32ui-sll": {
+     "exact_chip_stream": true,
+     "instructions": 455,
+     "first_mismatch": null,
+     "halted": true
+    },
+    "rv32um-mul": {
+     "exact_chip_stream": true,
+     "instructions": 421,
+     "first_mismatch": null,
+     "halted": true
+    },
+    "c-crc32": {
+     "exact_chip_stream": true,
+     "instructions": 2665,
+     "first_mismatch": null,
+     "halted": true
+    }
+   },
+   "n_exact": 4,
+   "n_programs": 4,
+   "seconds": 40.34885597229004
+  },
+  "fp8": {
+   "max_relative_weight_error": 0.028571446736653645,
+   "programs": {
+    "rv32ui-add": {
+     "exact_chip_stream": false,
+     "instructions": 427,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32ui-sll": {
+     "exact_chip_stream": false,
+     "instructions": 455,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32um-mul": {
+     "exact_chip_stream": false,
+     "instructions": 421,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "c-crc32": {
+     "exact_chip_stream": false,
+     "instructions": 2665,
+     "first_mismatch": 0,
+     "halted": false
+    }
+   },
+   "n_exact": 0,
+   "n_programs": 4,
+   "seconds": 67.71727275848389
+  },
+  "nvfp4a16": {
+   "max_relative_weight_error": 1.0,
+   "programs": {
+    "rv32ui-add": {
+     "exact_chip_stream": false,
+     "instructions": 427,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32ui-sll": {
+     "exact_chip_stream": false,
+     "instructions": 455,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32um-mul": {
+     "exact_chip_stream": false,
+     "instructions": 421,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "c-crc32": {
+     "exact_chip_stream": false,
+     "instructions": 2665,
+     "first_mismatch": 0,
+     "halted": false
+    }
+   },
+   "n_exact": 0,
+   "n_programs": 4,
+   "seconds": 68.31961464881897
+  },
+  "q8_0": {
+   "max_relative_weight_error": 0.00390625,
+   "programs": {
+    "rv32ui-add": {
+     "exact_chip_stream": false,
+     "instructions": 427,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32ui-sll": {
+     "exact_chip_stream": false,
+     "instructions": 455,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32um-mul": {
+     "exact_chip_stream": false,
+     "instructions": 421,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "c-crc32": {
+     "exact_chip_stream": false,
+     "instructions": 2665,
+     "first_mismatch": 0,
+     "halted": false
+    }
+   },
+   "n_exact": 0,
+   "n_programs": 4,
+   "seconds": 67.76959204673767
+  },
+  "q4_k_m": {
+   "max_relative_weight_error": 0.0712890625,
+   "programs": {
+    "rv32ui-add": {
+     "exact_chip_stream": false,
+     "instructions": 427,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32ui-sll": {
+     "exact_chip_stream": false,
+     "instructions": 455,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "rv32um-mul": {
+     "exact_chip_stream": false,
+     "instructions": 421,
+     "first_mismatch": 0,
+     "halted": false
+    },
+    "c-crc32": {
+     "exact_chip_stream": false,
+     "instructions": 2665,
+     "first_mismatch": 0,
+     "halted": false
+    }
+   },
+   "n_exact": 0,
+   "n_programs": 4,
+   "seconds": 67.59128522872925
+  }
+ }
+}

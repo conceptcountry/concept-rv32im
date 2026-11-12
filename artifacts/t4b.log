@@ -1,0 +1,42 @@
+ERROR: usage: pytest [options] [file_or_dir] [file_or_dir] [...]
+pytest: error: unrecognized arguments: -n
+  inifile: /home/somewheresystems/qwenputer/qwenputer/experimental/riscv/pyproject.toml
+  rootdir: /home/somewheresystems/qwenputer/qwenputer/experimental/riscv
+
+sssssss.s.......s.s.s..sss.............................................. [ 28%]
+............................................F........................... [ 56%]
+........................................................................ [ 85%]
+......................................                                   [100%]
+=================================== FAILURES ===================================
+__________________________ test_fuzz_free_running_cpu __________________________
+
+circ = RvCore(target=Target(key_heads=16, value_heads=32, intermediate=9216))
+
+    def test_fuzz_free_running_cpu(circ):
+        progs = [assemble(fuzz.gen_program(2000 + s, block=30, iters=2)) for s in range(2)]
+>       res = fuzz.free_run(circ, progs, batch=2, device="cpu", compile_=False)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_rv_fuzz.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+chipformer/rv/fuzz.py:86: in free_run
+    fr = fastexec.FreeRun(c, batch, device, compile_, v2=v2)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chipformer/rv/fastexec.py:269: in __init__
+    t0 = S.tok(nm) if nm in S.CONTROLS else S.tok(nm, 0)
+                                            ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'Q', payload = 0
+
+    def tok(name: str, payload: int = 0) -> int:
+        if name in CONTROLS:
+            return CONTROLS[name]
+>       base, size = FAMILIES[name]
+                     ^^^^^^^^^^^^^^
+E       KeyError: 'Q'
+
+chipformer/rv/spec.py:111: KeyError
+=========================== short test summary info ============================
+FAILED tests/test_rv_fuzz.py::test_fuzz_free_running_cpu - KeyError: 'Q'
+1 failed, 239 passed, 14 skipped in 543.38s (0:09:03)
