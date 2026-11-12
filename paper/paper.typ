@@ -44,8 +44,9 @@ single end-to-end sweep on the merged checkpoint runs #swprogs programs and
 #swdiverged divergences. We then compile two neural networks to this instruction set. An MNIST classifier's
 forward pass runs inside the weights and matches the reference emulator exactly over
 #mlpinstrm#[ M] instructions. A character-level GPT with attention, softmax and a residual
-stream reproduces its integer specification as a compiled program; its run on the
-checkpoint is reported in #ref(<inference>) only once complete. Both are
+stream reproduces its integer specification as a compiled program, and on the merged
+checkpoint its #gptfourinstrm#[ M] instructions also match the reference emulator
+exactly. Both are
 integer end to end because the machine has no FPU, a design the measurements force rather
 than suggest: an #raw("expf") costs #opexpfrel int8 multiply-accumulates, so a float
 softmax in the inner model would cost #fsratio#[×] every matrix multiplication it

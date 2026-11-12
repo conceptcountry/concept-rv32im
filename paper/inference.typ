@@ -52,11 +52,11 @@
 #let mlpoutput = "img0 want=0 pred=0 logit=14355 ⏎ img1 want=1 pred=1 logit=11573 ⏎ img2 want=2 pred=2 logit=14612 ⏎ img3 want=3 pred=3 logit=5682 ⏎ img4 want=4 pred=4 logit=10911 ⏎ img5 want=5 pred=5 logit=7459 ⏎ img6 want=6 pred=6 logit=11065 ⏎ img7 want=7 pred=7 logit=15007 ⏎ img8 want=8 pred=8 logit=11510 ⏎ img9 want=9 pred=9 logit=10046 ⏎ correct=10/10 ⏎ "
 
 // --- MLP through the Triton executor (cross-path check) ---
-#let mlpexecexact = "pending"
-#let mlpexectoksec = "pending"
-#let mlpexecminutes = "pending"
-#let mlppathsagree = "pending"
-#let execspeedup = "pending"
+#let mlpexecexact = "yes"
+#let mlpexectoksec = "1624"
+#let mlpexecminutes = "28.0"
+#let mlppathsagree = "yes"
+#let execspeedup = "6"
 
 // --- inner model: character GPT ---
 #let gptarch = "char GPT V=65 d=64 L=2 H=2 ff=256 ctx=64"
@@ -81,16 +81,16 @@
 #let gptcorpus = "tiny Shakespeare"
 
 // --- GPT run: gpt4_run ---
-#let gptfourinstr = "pending"
-#let gptfourinstrm = "pending"
-#let gptfourtoks = "pending"
-#let gptfourreftoks = "pending"
-#let gptfourexact = "pending"
-#let gptfourechoes = "pending"
-#let gptfourhalted = "pending"
-#let gptfourtoksec = "pending"
-#let gptfourhours = "pending"
-#let gptfouroutput = "pending"
+#let gptfourinstr = "23,600,604"
+#let gptfourinstrm = "23.6"
+#let gptfourtoks = "27,506,656"
+#let gptfourreftoks = "27,506,574"
+#let gptfourexact = "yes"
+#let gptfourechoes = "82"
+#let gptfourhalted = "yes"
+#let gptfourtoksec = "5190"
+#let gptfourhours = "1.47"
+#let gptfouroutput = "prompt=ROMEO: ⏎ generated= ⏎ Wha ⏎ tokens=10 generated=4 match_spec=1 ⏎ final_logit=29046 ⏎ "
 
 // --- GPT run: gpt8_run ---
 #let gpteightinstr = "pending"
@@ -115,5 +115,5 @@
 #let qplossyprogsexact = "0"
 #let qpsmallesterr = "0.39"
 
-#let infnartifacts = "22"
-#let infgenerated = "2026-11-12T02:36:48Z"
+#let infnartifacts = "24"
+#let infgenerated = "2026-11-12T04:00:15Z"

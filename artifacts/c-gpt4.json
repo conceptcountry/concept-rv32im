@@ -1,0 +1,43 @@
+{
+ "model": "/home/somewheresystems/qwenputer/out/Qwen-Concept-27B-Qwenputer",
+ "program": "c-gpt4",
+ "tokens": 27506656,
+ "reference_tokens": 27506574,
+ "context": {
+  "got": [
+   "J(932)",
+   "F0(112)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(112)",
+   "('text', 79)",
+   "F0(112)",
+   "J(1323)",
+   "NT"
+  ],
+  "want": [
+   "J(932)",
+   "F0(112)",
+   "F0(0)",
+   "F0(0)",
+   "F0(1)",
+   "BYTE(112)",
+   "F0(112)",
+   "J(1323)",
+   "NT",
+   "F0(114)"
+  ]
+ },
+ "instructions": 23600604,
+ "exact": false,
+ "exact_chip_stream": true,
+ "echoes": 82,
+ "echoes_equal_printed_bytes": true,
+ "halted": true,
+ "first_mismatch": 27502115,
+ "output": "prompt=ROMEO:\ngenerated=\nWha\ntokens=10 generated=4 match_spec=1\nfinal_logit=29046\n",
+ "seconds": 5299.846382379532,
+ "tok_per_s": 5190.085526148783,
+ "path": "Triton executor (Executor2) over the merged checkpoint's chip layers, fp32 IR arithmetic, one CUDA graph per token, batch 1"
+}

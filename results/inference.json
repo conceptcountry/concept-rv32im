@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-12T02:43:43Z",
+  "generated_utc": "2026-11-12T04:00:15Z",
   "mlp_run": {
     "program": "c-mlp",
     "exact_chip_stream": true,
@@ -16,11 +16,41 @@
     "output": "img0 want=0 pred=0 logit=14355\nimg1 want=1 pred=1 logit=11573\nimg2 want=2 pred=2 logit=14612\nimg3 want=3 pred=3 logit=5682\nimg4 want=4 pred=4 logit=10911\nimg5 want=5 pred=5 logit=7459\nimg6 want=6 pred=6 logit=11065\nimg7 want=7 pred=7 logit=15007\nimg8 want=8 pred=8 logit=11510\nimg9 want=9 pred=9 logit=10046\ncorrect=10/10\n",
     "path": "stock HF modules of the merged checkpoint's chip layers (bf16, fla kernels, compacted, CUDA graph)"
   },
-  "mlp_run_executor": null,
-  "gpt4_run": null,
+  "mlp_run_executor": {
+    "program": "c-mlp",
+    "exact_chip_stream": true,
+    "exact_raw_including_echoes": false,
+    "instructions": 2059619,
+    "tokens": 2724189,
+    "reference_tokens": 2723867,
+    "echoes": 322,
+    "echoes_equal_printed_bytes": true,
+    "halted": true,
+    "first_mismatch": 270972,
+    "seconds": 1677.8277077674866,
+    "tok_per_s": 1623.6404890611798,
+    "output": "img0 want=0 pred=0 logit=14355\nimg1 want=1 pred=1 logit=11573\nimg2 want=2 pred=2 logit=14612\nimg3 want=3 pred=3 logit=5682\nimg4 want=4 pred=4 logit=10911\nimg5 want=5 pred=5 logit=7459\nimg6 want=6 pred=6 logit=11065\nimg7 want=7 pred=7 logit=15007\nimg8 want=8 pred=8 logit=11510\nimg9 want=9 pred=9 logit=10046\ncorrect=10/10\n",
+    "path": "Triton executor (Executor2) over the merged checkpoint's chip layers, fp32 IR arithmetic, one CUDA graph per token, batch 1"
+  },
+  "gpt4_run": {
+    "program": "c-gpt4",
+    "exact_chip_stream": true,
+    "exact_raw_including_echoes": false,
+    "instructions": 23600604,
+    "tokens": 27506656,
+    "reference_tokens": 27506574,
+    "echoes": 82,
+    "echoes_equal_printed_bytes": true,
+    "halted": true,
+    "first_mismatch": 27502115,
+    "seconds": 5299.846382379532,
+    "tok_per_s": 5190.085526148783,
+    "output": "prompt=ROMEO:\ngenerated=\nWha\ntokens=10 generated=4 match_spec=1\nfinal_logit=29046\n",
+    "path": "Triton executor (Executor2) over the merged checkpoint's chip layers, fp32 IR arithmetic, one CUDA graph per token, batch 1"
+  },
   "gpt8_run": null,
-  "mlp_paths_agree": null,
-  "executor_speedup_over_hf": null,
+  "mlp_paths_agree": true,
+  "executor_speedup_over_hf": 6.3,
   "mlp_model": {
     "arch": "784-32-10 MLP, ReLU",
     "params_int8": 25408,
@@ -153,6 +183,8 @@
     "bench4b_exec.json": "9a28546d484d2c19cdfc1381b0c7ed1b29429e8ca78d8c751ded5d9e36ce2a54",
     "bench_ops.json": "f0f3afb65b77e9198aa2bde51a6a3196e7ca1a86538815032adf4deb946f0be6",
     "bex.log": "e82295927375b9576be0cbe9bfb1b7ac700e1be91929d2199320537b6506ad69",
+    "c-gpt4.json": "a848c7930e79c50805cc813892662b411f3d5f4e42a4ef6081b31afc85af1ee7",
+    "c-mlp-exec.json": "4b0d64be502b5041a173440942afe0cb1c55edc9a0bf08051e754ff26b69db19",
     "c-mlp.json": "0636f313074fbd69580304e8a90ad20444a611d379b094470ab98dfca4c5d823",
     "c27_c-crc32.json": "9bee835513bde1775275cf3ff9aef1b84215d80b023a81f408ee1d6f91ee728d",
     "c27_c-gmpmul.json": "e0bf6d5cc0d20e1432d42d4451a71acf9ea752f4f85a695d2dbf51713bf87d89",
@@ -173,5 +205,5 @@
     "text_concept.json": "5fc56eabf660487bbf88451334e317b3a8f3118f36810216d908e02d6a76ea7a",
     "text_merged.json": "01946908fd22d9bc732125c7eac558fdbc2d597f79fa2f7e2b2a5ccdc11bc1a8"
   },
-  "n_artifacts": 22
+  "n_artifacts": 24
 }
