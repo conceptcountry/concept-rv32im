@@ -120,11 +120,46 @@ around it.
 
 ## Weights
 
-Forthcoming as `ConceptCountry/concept-rv32im-27b` on HuggingFace and
-models.concept.country: bf16, FP8, NVFP4, and GGUF Q8_0 and Q4_K_M, with the vision tower
-and MTP head included. In every quantized format the eleven machine layers stay bf16. Each
-format is published with the result of running the machine on it; none is claimed exact
-until that run exists.
+Published as [`ConceptCountry/concept-rv32im-27b`](https://huggingface.co/ConceptCountry/concept-rv32im-27b) on HuggingFace, Apache-2.0,
+with the vision tower and the MTP head included. Mirrored on the Concept Country
+registry: <https://models.concept.country/api/models/conceptcountry/concept-rv32im-27b>.
+
+| folder | scheme | size | machine layers vs bf16 | text identity vs base |
+|---|---|---|---|---|
+| `bf16/` | bfloat16 | 89 GB | reference | 18/20 |
+| `fp8/` | FP8_BLOCK | 58 GB | identical (156/156) | 14/20 |
+| `nvfp4a16/` | NVFP4 W4A16 | 44 GB | identical (156/156) | 10/20 |
+| `gguf/` | GGUF Q8_0 | 57 GB | bf16/f32 (157/157) | not measured |
+| `gguf/` | GGUF Q4_K_M | 43 GB | bf16/f32 (157/157) | not measured |
+
+In every quantized format the eleven machine layers (language-model layers 0-10), the
+token embedding and the output head stay bf16; only the host's layers are quantized. A
+weight-grid probe found that FP8, Q8_0 and Q4_K_M each take the machine from 4 of 4
+programs exact to 0 of 4 when applied to its layers, while the bf16 control stays exact.
+
+"machine layers vs bf16" held in 5 of 5 formats: for the safetensors
+builds it is the sha256 of every tensor in that region against the bf16 release; for the
+GGUF builds, which rename, fuse and transpose relative to the HuggingFace layout, it is
+that no tensor in `blk.0`-`blk.10`, `token_embd` or `output` carries a quantized type.
+Every format loads: the safetensors ones as the stock conditional-generation class, the
+GGUF ones under `llama-cli`.
+
+"text identity vs base" is greedy continuation of 20 prompts for 48 new
+tokens against the *same format* of
+[Qwen Concept 27B](https://huggingface.co/ConceptCountry/qwen-concept-27b), counting
+identical continuations. At bf16 the release reproduces 18 of
+20, with differences beginning a median of
+121 characters in and reading as paraphrase. The two
+GGUF rows were not measured: the runtime available here is a CPU build and the
+comparison did not fit the machine's time budget. Those cells say so rather than
+carrying an inferred number.
+
+A sweep of the machine running programs on each quantized artifact has not been done.
+What is established is that the machine's weights were not quantized.
+
+Each folder carries a `SHA256SUMS`. The GGUF folder also carries
+`mmproj-concept-rv32im-27b-bf16.gguf` for the vision tower. The GGUF builds exclude the
+MTP head, as the base model's own GGUF does; it is present in the safetensors formats.
 
 Experimental, under evaluation.
 

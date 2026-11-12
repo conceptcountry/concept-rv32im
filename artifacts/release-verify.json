@@ -9,7 +9,9 @@
    "machine_unchanged_basis": "reference build; every other format is compared to it",
    "n_tensors_total": 1353,
    "loads": true,
-   "loads_basis": "yes"
+   "loads_basis": "yes",
+   "size_bytes": 89210817503,
+   "size_gb": 89.2
   },
   "fp8": {
    "n_machine_tensors": 156,
@@ -25,7 +27,9 @@
    "kind": "safetensors",
    "path": "/home/somewheresystems/qwenputer/dist/fp8",
    "loads": true,
-   "loads_basis": "yes"
+   "loads_basis": "yes",
+   "size_bytes": 57589721590,
+   "size_gb": 57.6
   },
   "nvfp4a16": {
    "n_machine_tensors": 156,
@@ -41,7 +45,9 @@
    "kind": "safetensors",
    "path": "/home/somewheresystems/qwenputer/dist/nvfp4a16",
    "loads": true,
-   "loads_basis": "yes"
+   "loads_basis": "yes",
+   "size_bytes": 43750004758,
+   "size_gb": 43.8
   },
   "Q8_0": {
    "n_machine_tensors": 157,
@@ -61,7 +67,9 @@
    "path": "/home/somewheresystems/qwenputer/dist/gguf/concept-rv32im-27b-Q8_0.gguf",
    "n_tensors_total": 1005,
    "loads": true,
-   "loads_basis": "yes"
+   "loads_basis": "yes",
+   "size_bytes": 57368860384,
+   "size_gb": 57.4
   },
   "Q4_K_M": {
    "n_machine_tensors": 157,
@@ -82,7 +90,10 @@
    "path": "/home/somewheresystems/qwenputer/dist/gguf/concept-rv32im-27b-Q4_K_M.gguf",
    "n_tensors_total": 1005,
    "loads": true,
-   "loads_basis": "yes"
+   "loads_basis": "yes",
+   "size_bytes": 42711283424,
+   "size_gb": 42.7
   }
- }
+ },
+ "size_basis": "on-disk bytes of the files uploaded for each format, measured on spark3; safetensors folders are the sum of their files, GGUF rows are the single file (mmproj-concept-rv32im-27b-bf16.gguf is 945,307,584 bytes and ships in gguf/ alongside both)"
 }
