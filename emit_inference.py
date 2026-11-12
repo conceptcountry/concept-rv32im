@@ -204,6 +204,84 @@ else:
 
 R["machine"] = {"code_rom_kb": 256, "rodata_kb": 128, "ram_kb": 32, "isa": "RV32IM + Zba"}
 
+# The release formats. Read from the build's own verification output rather than
+# restated, so a format whose check failed cannot be described here as having passed.
+_verify = os.path.join(ART, "release-verify.json")
+_text = os.path.join(ART, "release-text.json")
+if os.path.isfile(_verify):
+    with open(_verify) as fh:
+        V = json.load(fh)
+    T = {}
+    if os.path.isfile(_text):
+        with open(_text) as fh:
+            T = json.load(fh)
+
+    ORDER = ["bf16", "fp8", "nvfp4a16", "Q8_0", "Q4_K_M"]
+    SCHEME = {
+        "bf16": "bfloat16",
+        "fp8": "FP8_BLOCK, 128x128 blocks",
+        "nvfp4a16": "NVFP4 weights, group 16, bf16 activations",
+        "Q8_0": "GGUF Q8_0",
+        "Q4_K_M": "GGUF Q4_K_M, from the bf16 GGUF",
+    }
+    rows = []
+    for key in ORDER:
+        v = V["formats"].get(key)
+        if not v:
+            continue
+        t = (T.get(key) or {})
+        is_gguf = v.get("kind") == "gguf"
+        rows.append({
+            "format": key,
+            "scheme": SCHEME[key],
+            "machine_unchanged": bool(v.get("machine_unchanged")),
+            "machine_basis": "dtype" if is_gguf else "sha256",
+            "n_machine_tensors": v.get("n_machine_tensors"),
+            "n_machine_identical": (v.get("n_machine_tensors") if is_gguf
+                                    else v.get("identical")),
+            "host_quantized_tensors": (v.get("host_quantized_tensors")
+                                       if is_gguf else v.get("n_compressed_host_tensors")),
+            "loads": v.get("loads"),
+            "text_identical": t.get("n_identical"),
+            "text_prompts": t.get("n_prompts"),
+            "text_measured": t.get("n_identical") is not None,
+            "text_median_first_divergence_char": t.get("median_first_divergence_char"),
+        })
+
+    R["release"] = {
+        "formats": rows,
+        "n_formats": len(rows),
+        "n_formats_machine_unchanged": sum(1 for r in rows if r["machine_unchanged"]),
+        "n_formats_load": sum(1 for r in rows if r["loads"]),
+        "n_formats_text_measured": sum(1 for r in rows if r["text_measured"]),
+        "all_machine_unchanged": all(r["machine_unchanged"] for r in rows),
+        "all_load": all(r["loads"] for r in rows),
+        "text_method": (T.get("method") or {}),
+        "machine_layers": 11,
+        "repo": "ConceptCountry/concept-rv32im-27b",
+    }
+
+# The release build against the build the results were measured on.
+_cmp = os.path.join(ART, "cmp-builds.json")
+if os.path.isfile(_cmp):
+    with open(_cmp) as fh:
+        C = json.load(fh)
+    g = C["groups"]
+    R["release_build"] = {
+        "tensors_measured_build": C["tensors_a"],
+        "tensors_release_build": C["tensors_b"],
+        "vision_tensors": C["only_in_b"].get("visual"),
+        "mtp_tensors": C["only_in_b"].get("mtp"),
+        "only_in_measured_build": C["only_in_a"],
+        "machine_tensors": g["chip_layers"]["n"],
+        "machine_identical": g["chip_layers"]["identical"],
+        "machine_dtype_differs": g["chip_layers"]["dtype_differs"],
+        "host_tensors": g["host_layers"]["n"],
+        "host_identical": g["host_layers"]["identical"],
+        "norms_float32_instead_of_bf16": (g["host_layers"]["dtype_differs"]
+                                          + g["embed_head_norm"]["dtype_differs"]),
+    }
+
 R["artifact_digests"] = {}
 for name in sorted(os.listdir(ART)):
     path = os.path.join(ART, name)

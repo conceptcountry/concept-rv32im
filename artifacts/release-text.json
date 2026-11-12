@@ -1,0 +1,66 @@
+{
+ "bf16": {
+  "n_identical": 18,
+  "n_prompts": 20,
+  "median_first_divergence_char": 121,
+  "min_first_divergence_char": 0,
+  "a": "/home/somewheresystems/qwenputer/dist/bf16",
+  "b": "/home/somewheresystems/wsp/dist/qwen-concept-27b/bf16",
+  "divergent_prompts": [
+   "What does a Python list comprehension look like? Show one example.",
+   "Why do cats purr?"
+  ]
+ },
+ "fp8": {
+  "n_identical": 14,
+  "n_prompts": 20,
+  "median_first_divergence_char": 131,
+  "min_first_divergence_char": 31,
+  "a": "/home/somewheresystems/qwenputer/dist/fp8",
+  "b": "/home/somewheresystems/wsp/dist/qwen-concept-27b/fp8",
+  "divergent_prompts": [
+   "Write a haiku about a lighthouse in winter.",
+   "What is the capital of Australia, and why isn't it Sydney?",
+   "What does a Python list comprehension look like? Show one example.",
+   "Summarize the plot of Romeo and Juliet in one paragraph.",
+   "What is the difference between a virus and a bacterium?",
+   "Write a short, polite email declining a meeting invitation."
+  ]
+ },
+ "nvfp4a16": {
+  "n_identical": 10,
+  "n_prompts": 20,
+  "median_first_divergence_char": 110,
+  "min_first_divergence_char": 0,
+  "a": "/home/somewheresystems/qwenputer/dist/nvfp4a16",
+  "b": "/home/somewheresystems/wsp/dist/qwen-concept-27b/nvfp4a16",
+  "divergent_prompts": [
+   "Explain why the sky is blue in two sentences.",
+   "What is the capital of Australia, and why isn't it Sydney?",
+   "写一首关于秋天的短诗。",
+   "Give me three tips for writing clear technical documentation.",
+   "What does a Python list comprehension look like? Show one example.",
+   "Summarize the plot of Romeo and Juliet in one paragraph.",
+   "What is the difference between a virus and a bacterium?",
+   "Describe the smell of rain to someone who has never experienced it.",
+   "Why do cats purr?",
+   "In one sentence, what is the theory of general relativity about?"
+  ]
+ },
+ "Q8_0": {
+  "note": "not measured: the GGUF runtime available here is a CPU build, and 20 prompts x 48 tokens at its observed throughput does not fit the machine's time budget"
+ },
+ "Q4_K_M": {
+  "note": "not measured: the GGUF runtime available here is a CPU build, and 20 prompts x 48 tokens at its observed throughput does not fit the machine's time budget"
+ },
+ "base_bf16_vs_host": {
+  "summary": "At bf16 the release reproduces the base model's greedy continuation on 18 of 20 prompts; the differences are paraphrase-level and begin a median of 121 characters into a 48-token continuation. Quantization widens that gap in the way quantization does, and the comparison for each quantized format is against the same format of the base model, not against bf16."
+ },
+ "method": {
+  "prompts": 20,
+  "new_tokens": 48,
+  "decoding": "greedy, argmax over the text vocabulary",
+  "comparison": "decoded text, exact string equality, with the first differing character",
+  "note": "the release and the base model tokenize all 20 prompts to identical ids, so the comparison is of continuations rather than of tokenizers"
+ }
+}

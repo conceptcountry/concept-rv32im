@@ -177,6 +177,59 @@ else:
     s("qpsmallesterr", f'{qp["smallest_breaking_error"] * 100:.2f}')
 L.append("")
 
+rel = RES.get("release")
+if rel is None:
+    s("relstate", "pending")
+else:
+    s("relstate", "done")
+    n("relnformats", rel["n_formats"])
+    n("relnunchanged", rel["n_formats_machine_unchanged"])
+    n("relnload", rel["n_formats_load"])
+    n("relntextmeasured", rel["n_formats_text_measured"])
+    s("relallunchanged", "yes" if rel["all_machine_unchanged"] else "no")
+    s("relallload", "yes" if rel["all_load"] else "no")
+    n("relmachinelayers", rel["machine_layers"])
+    s("relrepo", rel["repo"])
+    meth = rel.get("text_method") or {}
+    if meth:
+        n("reltextprompts", meth.get("prompts", 0))
+        n("reltextnew", meth.get("new_tokens", 0))
+    # One row per format: scheme, how the machine was checked, whether it held,
+    # whether it loads, and the text figure or the reason there is none.
+    cells = []
+    for r in rel["formats"]:
+        if r["text_measured"]:
+            txt = f'{r["text_identical"]} of {r["text_prompts"]}'
+        else:
+            txt = "not measured"
+        held = "yes" if r["machine_unchanged"] else "NO"
+        basis = "sha256" if r["machine_basis"] == "sha256" else "dtype"
+        cells.append(
+            f'  ("{r["format"]}", "{r["scheme"]}", "{basis}", "{held}", '
+            f'"{"yes" if r["loads"] else "no"}", "{txt}"),'
+        )
+    L.append("#let reltable = (")
+    L.extend(cells)
+    L.append(")")
+    # The bf16 row carries the headline comparison against the base model.
+    bf = next((r for r in rel["formats"] if r["format"] == "bf16"), None)
+    if bf and bf["text_measured"]:
+        n("relbftextident", bf["text_identical"])
+        n("relbftextprompts", bf["text_prompts"])
+        n("relbftextdiv", bf["text_median_first_divergence_char"])
+L.append("")
+
+rb = RES.get("release_build")
+if rb is not None:
+    n("rbmachine", rb["machine_tensors"])
+    n("rbmachineident", rb["machine_identical"])
+    n("rbvision", rb["vision_tensors"])
+    n("rbmtp", rb["mtp_tensors"])
+    n("rbnormf32", rb["norms_float32_instead_of_bf16"])
+    n("rbtensorsrelease", rb["tensors_release_build"])
+    n("rbtensorsmeasured", rb["tensors_measured_build"])
+L.append("")
+
 s("infnartifacts", RES["n_artifacts"])
 s("infgenerated", RES["generated_utc"])
 

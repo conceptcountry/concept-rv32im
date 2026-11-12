@@ -603,6 +603,57 @@ checkpoint, and every one of the #shanormresc tensors that had to change equals 
 documented transform of the source bytes exactly. The rank-one edit from the companion paper
 is carried through untouched, because it lives in those bytes.
 
+== The released formats <formats>
+
+The released checkpoint is not the one the results above were measured on. The measured
+build is text-only, #rbtensorsmeasured tensors; the release keeps the vision tower
+(#rbvision tensors) and the MTP head (#rbmtp), #rbtensorsrelease in all, and its
+#rbmachineident of #rbmachine machine-layer tensors are byte-identical to the measured
+build. The two differ only in that #rbnormf32 RMSNorm gains are stored float32 in the
+release rather than bf16. The release layout loads as the stock conditional-generation
+class with no missing tensors and no shape mismatches.
+
+#relnformats formats are published. In each of the quantized ones the machine's
+#relmachinelayers layers, the token embedding and the output head stay bf16, and only the
+host's layers are quantized. The reason is in @inference: on the weight grids of these
+formats the machine goes from #qpprogs of #qpprogs programs exact to #qplossyprogsexact,
+while the bf16 control stays exact. A format that quantized the machine would be a
+different artifact, not a smaller one.
+
+#figure(
+  table(columns: 6, align: (left, left, left, center, center, right),
+    stroke: none,
+    table.hline(),
+    table.header[Format][Scheme][Machine check][Held][Loads][Text vs base],
+    table.hline(),
+    ..reltable.map(r => (
+      raw(r.at(0)), [#r.at(1)], [#r.at(2)], [#r.at(3)], [#r.at(4)], [#r.at(5)]
+    )).flatten(),
+    table.hline(),
+  ),
+  caption: [The released formats. "Machine check" is how the machine's tensors were
+  compared: sha256 of every tensor in the machine's layers, the embedding and the head
+  against the bf16 release, or, for the GGUF builds, the dtype of every tensor in that
+  same region. "Text vs base" is greedy continuation of #reltextprompts prompts for
+  #reltextnew new tokens against the same format of the base model, counting identical
+  continuations.],
+)
+
+The machine survived in #relnunchanged of #relnformats formats and every format loads. The
+GGUF conversion renames, fuses and transposes relative to the HuggingFace layout, so a
+tensor-by-tensor value comparison across the two is not well defined; what is checked there
+is that no tensor in the machine's region carries a quantized type, which is the claim being
+made. The GGUF builds exclude the MTP head, as the base model's own GGUF does.
+
+Text accuracy is measured against the same format of the base model rather than against
+bf16, because the question is whether the merge costs accuracy, not whether quantization
+does. At bf16 the release reproduces the base model's greedy continuation on
+#relbftextident of #relbftextprompts prompts, with the differences beginning a median of
+#relbftextdiv characters into the continuation and reading as paraphrase rather than error.
+Quantization widens that gap in the ordinary way. Text identity for the two GGUF formats was
+not measured: the runtime available here is a CPU build and the comparison does not fit the
+machine's time budget. That cell says so rather than carrying an inferred number.
+
 = Discussion
 
 The narrow claim is secure and worth stating precisely. An exact #isa machine, with

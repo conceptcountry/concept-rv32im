@@ -115,5 +115,35 @@
 #let qplossyprogsexact = "0"
 #let qpsmallesterr = "0.39"
 
-#let infnartifacts = "24"
-#let infgenerated = "2026-11-12T04:00:15Z"
+#let relstate = "done"
+#let relnformats = "5"
+#let relnunchanged = "5"
+#let relnload = "5"
+#let relntextmeasured = "3"
+#let relallunchanged = "yes"
+#let relallload = "yes"
+#let relmachinelayers = "11"
+#let relrepo = "ConceptCountry/concept-rv32im-27b"
+#let reltextprompts = "20"
+#let reltextnew = "48"
+#let reltable = (
+  ("bf16", "bfloat16", "sha256", "yes", "yes", "18 of 20"),
+  ("fp8", "FP8_BLOCK, 128x128 blocks", "sha256", "yes", "yes", "14 of 20"),
+  ("nvfp4a16", "NVFP4 weights, group 16, bf16 activations", "sha256", "yes", "yes", "10 of 20"),
+  ("Q8_0", "GGUF Q8_0", "dtype", "yes", "yes", "not measured"),
+  ("Q4_K_M", "GGUF Q4_K_M, from the bf16 GGUF", "dtype", "yes", "yes", "not measured"),
+)
+#let relbftextident = "18"
+#let relbftextprompts = "20"
+#let relbftextdiv = "121"
+
+#let rbmachine = "154"
+#let rbmachineident = "154"
+#let rbvision = "333"
+#let rbmtp = "15"
+#let rbnormf32 = "129"
+#let rbtensorsrelease = "1,353"
+#let rbtensorsmeasured = "1,005"
+
+#let infnartifacts = "27"
+#let infgenerated = "2026-11-12T06:41:30Z"

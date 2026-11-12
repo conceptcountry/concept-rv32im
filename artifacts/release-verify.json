@@ -1,0 +1,88 @@
+{
+ "bf16_release": "/home/somewheresystems/qwenputer/dist/bf16",
+ "formats": {
+  "bf16": {
+   "kind": "safetensors",
+   "path": "/home/somewheresystems/qwenputer/dist/bf16",
+   "n_machine_tensors": 156,
+   "machine_unchanged": true,
+   "machine_unchanged_basis": "reference build; every other format is compared to it",
+   "n_tensors_total": 1353,
+   "loads": true,
+   "loads_basis": "yes"
+  },
+  "fp8": {
+   "n_machine_tensors": 156,
+   "compared": 156,
+   "identical": 156,
+   "mismatched": [],
+   "missing": [],
+   "dtype_not_bf16": [],
+   "unexpected_machine_tensors": [],
+   "machine_unchanged": true,
+   "n_host_tensors": 1597,
+   "n_host_compressed": 400,
+   "kind": "safetensors",
+   "path": "/home/somewheresystems/qwenputer/dist/fp8",
+   "loads": true,
+   "loads_basis": "yes"
+  },
+  "nvfp4a16": {
+   "n_machine_tensors": 156,
+   "compared": 156,
+   "identical": 156,
+   "mismatched": [],
+   "missing": [],
+   "dtype_not_bf16": [],
+   "unexpected_machine_tensors": [],
+   "machine_unchanged": true,
+   "n_host_tensors": 1997,
+   "n_host_compressed": 800,
+   "kind": "safetensors",
+   "path": "/home/somewheresystems/qwenputer/dist/nvfp4a16",
+   "loads": true,
+   "loads_basis": "yes"
+  },
+  "Q8_0": {
+   "n_machine_tensors": 157,
+   "machine_dtypes": {
+    "BF16": 90,
+    "F32": 67
+   },
+   "host_dtypes": {
+    "Q8_0": 496,
+    "F32": 352
+   },
+   "host_quantized_tensors": 496,
+   "quantized_tensors_in_machine": [],
+   "machine_unchanged": true,
+   "basis": "every tensor in blk.0-blk.10, token_embd and output carries a float type (BF16 or F32) and none carries a block-quantized type; GGUF renames, fuses and transposes relative to the HuggingFace layout, so per-tensor value comparison across the two is not well defined",
+   "kind": "gguf",
+   "path": "/home/somewheresystems/qwenputer/dist/gguf/concept-rv32im-27b-Q8_0.gguf",
+   "n_tensors_total": 1005,
+   "loads": true,
+   "loads_basis": "yes"
+  },
+  "Q4_K_M": {
+   "n_machine_tensors": 157,
+   "machine_dtypes": {
+    "BF16": 90,
+    "F32": 67
+   },
+   "host_dtypes": {
+    "Q4_K": 442,
+    "F32": 352,
+    "Q6_K": 54
+   },
+   "host_quantized_tensors": 496,
+   "quantized_tensors_in_machine": [],
+   "machine_unchanged": true,
+   "basis": "every tensor in blk.0-blk.10, token_embd and output carries a float type (BF16 or F32) and none carries a block-quantized type; GGUF renames, fuses and transposes relative to the HuggingFace layout, so per-tensor value comparison across the two is not well defined",
+   "kind": "gguf",
+   "path": "/home/somewheresystems/qwenputer/dist/gguf/concept-rv32im-27b-Q4_K_M.gguf",
+   "n_tensors_total": 1005,
+   "loads": true,
+   "loads_basis": "yes"
+  }
+ }
+}

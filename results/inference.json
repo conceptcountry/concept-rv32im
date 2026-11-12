@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-12T04:00:15Z",
+  "generated_utc": "2026-11-12T06:41:30Z",
   "mlp_run": {
     "program": "c-mlp",
     "exact_chip_stream": true,
@@ -179,6 +179,108 @@
     "ram_kb": 32,
     "isa": "RV32IM + Zba"
   },
+  "release": {
+    "formats": [
+      {
+        "format": "bf16",
+        "scheme": "bfloat16",
+        "machine_unchanged": true,
+        "machine_basis": "sha256",
+        "n_machine_tensors": 156,
+        "n_machine_identical": null,
+        "host_quantized_tensors": null,
+        "loads": true,
+        "text_identical": 18,
+        "text_prompts": 20,
+        "text_measured": true,
+        "text_median_first_divergence_char": 121
+      },
+      {
+        "format": "fp8",
+        "scheme": "FP8_BLOCK, 128x128 blocks",
+        "machine_unchanged": true,
+        "machine_basis": "sha256",
+        "n_machine_tensors": 156,
+        "n_machine_identical": 156,
+        "host_quantized_tensors": null,
+        "loads": true,
+        "text_identical": 14,
+        "text_prompts": 20,
+        "text_measured": true,
+        "text_median_first_divergence_char": 131
+      },
+      {
+        "format": "nvfp4a16",
+        "scheme": "NVFP4 weights, group 16, bf16 activations",
+        "machine_unchanged": true,
+        "machine_basis": "sha256",
+        "n_machine_tensors": 156,
+        "n_machine_identical": 156,
+        "host_quantized_tensors": null,
+        "loads": true,
+        "text_identical": 10,
+        "text_prompts": 20,
+        "text_measured": true,
+        "text_median_first_divergence_char": 110
+      },
+      {
+        "format": "Q8_0",
+        "scheme": "GGUF Q8_0",
+        "machine_unchanged": true,
+        "machine_basis": "dtype",
+        "n_machine_tensors": 157,
+        "n_machine_identical": 157,
+        "host_quantized_tensors": 496,
+        "loads": true,
+        "text_identical": null,
+        "text_prompts": null,
+        "text_measured": false,
+        "text_median_first_divergence_char": null
+      },
+      {
+        "format": "Q4_K_M",
+        "scheme": "GGUF Q4_K_M, from the bf16 GGUF",
+        "machine_unchanged": true,
+        "machine_basis": "dtype",
+        "n_machine_tensors": 157,
+        "n_machine_identical": 157,
+        "host_quantized_tensors": 496,
+        "loads": true,
+        "text_identical": null,
+        "text_prompts": null,
+        "text_measured": false,
+        "text_median_first_divergence_char": null
+      }
+    ],
+    "n_formats": 5,
+    "n_formats_machine_unchanged": 5,
+    "n_formats_load": 5,
+    "n_formats_text_measured": 3,
+    "all_machine_unchanged": true,
+    "all_load": true,
+    "text_method": {
+      "prompts": 20,
+      "new_tokens": 48,
+      "decoding": "greedy, argmax over the text vocabulary",
+      "comparison": "decoded text, exact string equality, with the first differing character",
+      "note": "the release and the base model tokenize all 20 prompts to identical ids, so the comparison is of continuations rather than of tokenizers"
+    },
+    "machine_layers": 11,
+    "repo": "ConceptCountry/concept-rv32im-27b"
+  },
+  "release_build": {
+    "tensors_measured_build": 1005,
+    "tensors_release_build": 1353,
+    "vision_tensors": 333,
+    "mtp_tensors": 15,
+    "only_in_measured_build": 0,
+    "machine_tensors": 154,
+    "machine_identical": 154,
+    "machine_dtype_differs": 0,
+    "host_tensors": 848,
+    "host_identical": 720,
+    "norms_float32_instead_of_bf16": 129
+  },
   "artifact_digests": {
     "bench4b_exec.json": "9a28546d484d2c19cdfc1381b0c7ed1b29429e8ca78d8c751ded5d9e36ce2a54",
     "bench_ops.json": "f0f3afb65b77e9198aa2bde51a6a3196e7ca1a86538815032adf4deb946f0be6",
@@ -192,12 +294,15 @@
     "calc27.json": "b4f466a17d104573bf77caccc185ad7e721d047c5a1ecce054c334f3fdf0971c",
     "calc4b.log": "0b38fe324ec6bd1e92076eee49b36f3077ac11bc0aa887fc00b8ddea2f218e58",
     "chipformer.json": "3210ee94178ba819a8b600109ddc1271e0d101efe3cfb46e95f4828edeff3c88",
+    "cmp-builds.json": "ef2a399c19888beaa01639739e3fde72601cb5b96c83256eacd13d0b462288a3",
     "gpt_meta.json": "63b4957e1b1166024937f241b52d17d6ad1b5b64fb4e55e76ff91bf4f359c5ae",
     "merged_config.json": "e7abc6f5175806bc91c695fd6e522a34bd405d04400d4a7b48cea78f3755696a",
     "mlp_meta.json": "87dce55964441dcc98aceff572ccd6ebe02234a9bd0829ed2ae4b78d14665066",
     "p2_and_exec.log": "5653f027c5afa293354135a9c10293348fe97e16af656e5d1567d0abbbc40da1",
     "prompts20.json": "4aba7a734b82a0e3c6384ef4026c84cf5de93d66156c6358f2ed0fe0bdb3ff9b",
     "quant_probe_chip.json": "d4460087aab5053578ff6a1c7a83f62e386f8de8fe4a8e3408d8b5a81018e1e3",
+    "release-text.json": "008643861e79b0b16ffda1c01023de4543e57c099f956c98453443d4e620ab61",
+    "release-verify.json": "0b4640c8b15b0ca90df101dd627084376f8fe5dd651219c040960f73b831e562",
     "sha_report.json": "e9f0546b1b64b118f44f672285d7df0e5022061f7808929605ce7f3c85aef50a",
     "t27b.log": "e32b87def6446eb6ba8920a2a088a85159ad187aad6a81f38e86bb388b648ee6",
     "t4b.log": "ba0e5f1190668f8c2b9cf0b736b510347394ae9425e3d5a727c5bdaefc64c803",
@@ -205,5 +310,5 @@
     "text_concept.json": "5fc56eabf660487bbf88451334e317b3a8f3118f36810216d908e02d6a76ea7a",
     "text_merged.json": "01946908fd22d9bc732125c7eac558fdbc2d597f79fa2f7e2b2a5ccdc11bc1a8"
   },
-  "n_artifacts": 24
+  "n_artifacts": 27
 }
